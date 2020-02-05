@@ -2,10 +2,7 @@ package hw15.model;
 
 import lombok.*;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
+import java.io.*;
 
 @Getter
 @Setter
@@ -14,28 +11,51 @@ import java.util.ArrayList;
 @NoArgsConstructor
 
 public class FileManager {
-    String fileName = "src/main/resources/data.txt";
-    String[] allWords;
-    ArrayList<String> shortWords;
-    String split;
-    FileReader songReader;
+    String fileReadName = "src/main/resources/data.txt";
+    String fileWriteName = "src/main/resources/writeText.txt";
+    File file = new File(fileReadName);
+    String[] songArray;
+    String[] shortWordsArray;
 
+    public void countWords() throws IOException {
+        FileReader fileReader = new FileReader(fileReadName);
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
 
-    public void countAllWords() throws IOException {
-        FileReader songReader = new FileReader(fileName);
-        BufferedReader br = new BufferedReader(songReader);
-        int wc = 0;
-
-
-        while ((split = br.readLine()) != null) {
-            allWords = split.split(" ");
-            wc = wc + allWords.length;
+        String line;
+        int numberOfWords = 0;
+        while ((line = bufferedReader.readLine()) != null) {
+            songArray = line.split(" ");
+            numberOfWords = numberOfWords + songArray.length;
         }
-
-        songReader.close();
-        System.out.println("Number of words in the file:" + wc);
+        fileReader.close();
+        System.out.println("The quantity of all words in the song :" + numberOfWords);
     }
 
-    public void countShortWords() {
+    public void writeShortWords() throws IOException {
+        FileReader fileReader = new FileReader(fileReadName);
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
+        FileWriter fileWriter = new FileWriter(fileWriteName);
+        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+
+        String line;
+        int numberOfWords = 0;
+        while ((line = bufferedReader.readLine()) != null) {
+            shortWordsArray = line.split(" ");
+
+            for (String s : shortWordsArray) {
+                if (s.length() <= 3 && !s.equals("" + "")) {
+                    bufferedWriter.write(s + "\n");
+                    bufferedWriter.flush();
+
+                    numberOfWords++;
+
+                }
+            }
+        }
+        System.out.println("The quantity of short words in the song :" + numberOfWords);
+    }
+
+    public void showMostCommonWords() {
+        System.err.println("Ну привіт, Маркіян. Як справи?");
     }
 }

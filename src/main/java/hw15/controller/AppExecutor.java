@@ -9,7 +9,9 @@ public class AppExecutor {
 
     public  void method() {
         try {
-            fileManager.countAllWords();
+            fileManager.countWords();
+            fileManager.writeShortWords();
+            fileManager.showMostCommonWords();
         } catch (IOException e) {
             e.printStackTrace();
         }
