@@ -7,10 +7,12 @@ import java.io.IOException;
 public class AppExecutor {
     private FileManager fileManager = new FileManager();
 
-    public  void method() {
+    public  void runProgram() {
         try {
             fileManager.countWords();
-            fileManager.writeShortWords();
+            fileManager.writeShortWordsToNewFile();
+            fileManager.readShortWordsFromNewFile();
+            fileManager.writeAllWordsToList();
             fileManager.showMostCommonWords();
         } catch (IOException e) {
             e.printStackTrace();
