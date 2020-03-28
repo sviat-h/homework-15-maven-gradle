@@ -1,1 +1,1 @@
-# homework-15-maven-gradle
+# maven-gradle
